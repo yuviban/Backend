@@ -8,7 +8,11 @@ const { router: roomRoutes, attachSocket, startSong } = require("./routes/roomRo
 const app = express();
 const server = http.createServer(app);
 
-app.use(cors());
+const cors = require('cors');
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://moodify-c8xk.onrender.com'],
+  credentials: true
+}));
 app.use(express.json());
 
 
@@ -24,7 +28,14 @@ const io = new Server(server, {
 });
 
 
-app.use("/songs", express.static(path.join(__dirname, "routes/songs")));
+app.use("/songs", express.static(path.join(__dirname, "routes/songs"),{
+   setHeaders: (res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Range');
+  }
+}));
+
 
 attachSocket(io);
 
