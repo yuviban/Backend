@@ -8,7 +8,7 @@ const { router: roomRoutes, attachSocket, startSong } = require("./routes/roomRo
 const app = express();
 const server = http.createServer(app);
 
-const cors = require('cors');
+
 app.use(cors({
   origin: ['http://localhost:3000', 'https://moodify-c8xk.onrender.com'],
   credentials: true
