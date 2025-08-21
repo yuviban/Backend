@@ -1,9 +1,13 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const mm = require("music-metadata");
 const router = express.Router();
 let ioInstance;
+
+let mm;
+(async () => {
+  mm = await import("music-metadata");
+})();
 
 // Room state to track current song and start time
 const roomState = {
