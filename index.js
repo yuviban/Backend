@@ -6,13 +6,8 @@ const path = require("path");
 const { Server } = require("socket.io");
 const { router: roomRoutes, attachSocket, startSong } = require("./routes/roomRoutes");
 const app = express();
+app.use(cors());
 const server = http.createServer(app);
-
-
-app.use(cors({
-  origin: ['http://localhost:3000', 'https://moodify-c8xk.onrender.com'],
-  credentials: true
-}));
 app.use(express.json());
 
 
